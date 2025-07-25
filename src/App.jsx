@@ -72,7 +72,7 @@ function App() {
           </Link>
         </span>
       </div>
-      <Header onThemeToggle={toggleDarkMode} isDarkMode={darkMode} onSearch={setSearchQuery} />
+      <Header onThemeToggle={toggleDarkMode} isDarkMode={darkMode}/>
       <ToastContainer position="top-center" />
       <main className=" md:pt-0 md:pb-12 dark:bg-gray-900 bg-[var(--bg)]">
         <Outlet/>
