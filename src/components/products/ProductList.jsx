@@ -1,39 +1,40 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchProducts } from '../../redux/slices/productSlice'
-import ProductCard from './ProductCard'
-import { motion as Motion } from 'framer-motion' // For animations
-import { SparklesIcon } from '@heroicons/react/24/outline'
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts } from "../../redux/slices/productSlice";
+import ProductCard from "./ProductCard";
+import { motion as Motion } from "framer-motion";
+import { SparklesIcon } from "@heroicons/react/24/outline";
 
-const ProductList = ({ category, limit }) => {
-  const dispatch = useDispatch()
-  const {
-    items: products,
-    status,
-    error,
-  } = useSelector((state) => state.products)
+const ProductList = ({ products, category }) => {
+  const dispatch = useDispatch();
+  const { items: reduxProducts, status, error } = useSelector((state) => state.products);
 
+  // Only fetch products if products prop is not provided
   useEffect(() => {
-    dispatch(fetchProducts({ category, limit }))
-  }, [dispatch, category, limit])
+    if (!products) {
+      dispatch(fetchProducts({ category }));
+    }
+  }, [dispatch, category, products]);
 
-  // Loading State
-  if (status === 'loading') {
+  // Decide which products to display
+  const displayProducts = products || reduxProducts;
+
+  // Show loading/error states only when using Redux data
+  if (!products && status === "loading") {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[400px] bg-gray-50 dark:bg-gray-800 rounded-xl">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-500 dark:border-indigo-400"></div>
-        <p className="mt-4 text-gray-600 dark:text-gray-300 font-medium">
+      <div className="flex min-h-[400px] flex-col items-center justify-center rounded-xl bg-gray-50 dark:bg-gray-800">
+        <div className="h-12 w-12 animate-spin rounded-full border-b-2 border-indigo-500 dark:border-indigo-400"></div>
+        <p className="mt-4 font-medium text-gray-600 dark:text-gray-300">
           Loading amazing products...
         </p>
       </div>
-    )
+    );
   }
 
-  // Error State
-  if (status === 'failed') {
+  if (!products && status === "failed") {
     return (
-      <div className="min-h-[400px] flex flex-col items-center justify-center bg-red-50 dark:bg-red-900/20 rounded-xl p-8">
-        <div className="bg-red-100 dark:bg-red-900/40 rounded-full p-3">
+      <div className="flex min-h-[400px] flex-col items-center justify-center rounded-xl bg-red-50 p-8 dark:bg-red-900/20">
+        <div className="rounded-full bg-red-100 p-3 dark:bg-red-900/40">
           <svg
             className="h-8 w-8 text-red-500 dark:text-red-400"
             fill="none"
@@ -51,24 +52,26 @@ const ProductList = ({ category, limit }) => {
         <h3 className="mt-4 text-lg font-semibold text-red-800 dark:text-red-200">
           Oops! Something went wrong
         </h3>
-        <p className="mt-2 text-red-600 dark:text-red-300 text-center">{error}</p>
+        <p className="mt-2 text-center text-red-600 dark:text-red-300">
+          {error}
+        </p>
       </div>
-    )
+    );
   }
 
   // Empty State
-  if (!products || products.length === 0) {
+  if (!displayProducts || displayProducts.length === 0) {
     return (
-      <div className="min-h-[400px] flex flex-col items-center justify-center bg-gray-50 dark:bg-gray-800 rounded-xl p-8">
+      <div className="flex min-h-[400px] flex-col items-center justify-center rounded-xl bg-gray-50 p-8 dark:bg-gray-800">
         <SparklesIcon className="h-12 w-12 text-gray-400 dark:text-gray-500" />
         <h3 className="mt-4 text-lg font-semibold text-gray-900 dark:text-gray-100">
           No products found
         </h3>
-        <p className="mt-2 text-gray-500 dark:text-gray-400 text-center">
+        <p className="mt-2 text-center text-gray-500 dark:text-gray-400">
           Try adjusting your search or filters to find what you're looking for.
         </p>
       </div>
-    )
+    );
   }
 
   // Product Grid
@@ -80,23 +83,23 @@ const ProductList = ({ category, limit }) => {
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
             {category}
           </h2>
-          <div className="h-1 w-20 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full"></div>
+          <div className="h-1 w-20 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500"></div>
         </div>
       )}
 
       {/* Products Grid */}
-      <Motion.div 
-        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6"
+      <Motion.div
+        className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        {products.map((product, index) => (
+        {displayProducts.map((product, index) => (
           <Motion.div
             key={product.$id}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
+            transition={{ duration: 0.5, delay: index * 0.2 }}
           >
             <ProductCard product={product} />
           </Motion.div>
@@ -105,11 +108,10 @@ const ProductList = ({ category, limit }) => {
 
       {/* Products Count */}
       <div className="text-center text-sm text-gray-500 dark:text-gray-400">
-        Showing {products.length} {products.length === 1 ? 'product' : 'products'}
-        {limit && ` of ${limit}`}
+        Showing {displayProducts.length} {displayProducts.length === 1 ? "product" : "products"}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ProductList
+export default ProductList;

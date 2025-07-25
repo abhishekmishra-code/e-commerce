@@ -21,6 +21,7 @@ import FAQPage from './pages/FAQPage.jsx'
 import CheckoutPage from './pages/CheckoutPage.jsx'
 import OrderConfirmationPage from './pages/OrderConfirmationPage.jsx'
 import OrdersPage from './pages/OrdersPage.jsx'
+import SearchResults from './pages/SearchResults.jsx'
 
 const router = createBrowserRouter([
   {
@@ -74,6 +75,10 @@ const router = createBrowserRouter([
       {
         path: '/product/:productId',
         element: <ProductViewPage />, // Optional: only allow admins
+      },
+      {
+        path: '/products/search',
+        element: <SearchResults />, // Optional: only allow admins
       },
       {
         path: '/support/shipping-policy',

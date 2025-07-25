@@ -45,47 +45,6 @@ function App() {
 
   return (
     <>
-      {/* <Header
-        logo={<Logo />} // or logo="/path/to/logo.png"
-        navigationItems={[
-          {
-            label: (
-              <>
-                <HeartIcon className="w-8 h-8 inline-block mr-0.5" />
-                <span>Wishlist</span>
-              </>
-            ),
-            to: '/wishlist',
-          },
-        ]}
-        user={userData}
-        onLogout={() => {
-          dispatch(logoutUser())
-          toast(`You’ve been logged out. See you soon!`)
-        }}
-        onLogin={() => navigate('/login')}
-        theme={darkMode ? 'dark' : 'light'}
-        sticky={true}
-        onThemeToggle={toggleDarkMode}
-        isDarkMode={darkMode}
-        ctaButton={[
-          <Link key={'cart'} to={'/cart'}>
-            <div className="relative">
-              <ShoppingCartIcon className="w-8 h-8 inline-block mr-0.5" />
-              <span>Cart</span>
-              {!!cartItems.length && (
-                <span className="bg-[#d32f2f] w-6 h-6 rounded-full border-2 text-white border-white inline-block text-center leading-5 absolute -top-3 right-5.5">
-                  {cartItems?.length}
-                </span>
-              )}
-            </div>
-          </Link>,
-          <Link key={'orders'} to={'/orders'} className=''>
-            <FaBox className="h-5 w-5 inline-block mr-1" />
-            <span>My Orders</span>
-          </Link>,
-        ]}
-      /> */}
       {/* <!-- Top Bar --> */}
       <div class="top-bar flex items-center justify-between bg-[#1a8d8d] px-1.5 py-2 text-white sm:px-[4vw] md:px-[2vw]">
         <span className="flex items-center gap-1 md:text-base text-sm">
@@ -113,10 +72,10 @@ function App() {
           </Link>
         </span>
       </div>
-      <Header onThemeToggle={toggleDarkMode} isDarkMode={darkMode} />
+      <Header onThemeToggle={toggleDarkMode} isDarkMode={darkMode} onSearch={setSearchQuery} />
       <ToastContainer position="top-center" />
-      <main className=" md:pt-16 md:pb-12 dark:bg-gray-900 bg-[var(--bg)]">
-        <Outlet />
+      <main className=" md:pt-0 md:pb-12 dark:bg-gray-900 bg-[var(--bg)]">
+        <Outlet/>
       </main>
       <Footer />
     </>

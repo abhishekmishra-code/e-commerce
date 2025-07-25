@@ -3,45 +3,45 @@ import { useSelector } from "react-redux";
 import Container from "../components/layout/Container";
 import ProductList from "../components/products/ProductList";
 import CustomSwiper from "../components/carousel/CustomSwiper";
-import {
-  FaGift,
-  FaHeadset,
-  FaTags,
-  FaTruckMoving,
-} from "react-icons/fa";
-import { Link } from "react-router";
+import { FaGift, FaHeadset, FaTags, FaTruckMoving } from "react-icons/fa";
+import { Link, useOutletContext } from "react-router";
 import {
   SpeakerWaveIcon,
   DevicePhoneMobileIcon,
 } from "@heroicons/react/24/solid";
 
 export default function HomePage() {
-  const { userData } = useSelector((state) => state.auth);
   const products = [
     {
       tag: "Best Seller",
-      icon: <SpeakerWaveIcon className="text-blue-600 dark:text-blue-400 h-12 w-12" />,
+      icon: (
+        <SpeakerWaveIcon className="h-12 w-12 text-blue-600 dark:text-blue-400" />
+      ),
       name: "FITRIC M3 Portable Bluetooth Mini Speaker",
       price: "₹799",
       oldPrice: "₹1,299",
     },
     {
       tag: "New Arrival",
-      icon: <DevicePhoneMobileIcon className="text-blue-600 dark:text-blue-400 h-12 w-12" />,
+      icon: (
+        <DevicePhoneMobileIcon className="h-12 w-12 text-blue-600 dark:text-blue-400" />
+      ),
       name: "FITRIC Upgraded Latest Wireless Stylish Neckband",
       price: "₹1,099",
       oldPrice: "₹1,799",
     },
     {
       tag: "Limited Stock",
-      icon: <DevicePhoneMobileIcon className="text-blue-600 dark:text-blue-400 h-12 w-12" />,
+      icon: (
+        <DevicePhoneMobileIcon className="h-12 w-12 text-blue-600 dark:text-blue-400" />
+      ),
       name: "FITRIC Touch Screen Display Wireless Earbuds",
       price: "₹1,499",
       oldPrice: "₹2,299",
     },
     {
       tag: "Best Seller",
-      icon: <FaGift className="text-blue-600 dark:text-blue-400 h-12 w-12" />,
+      icon: <FaGift className="h-12 w-12 text-blue-600 dark:text-blue-400" />,
       name: "FITRIC Water Dispenser 5698 Bottled Water Dispenser",
       price: "₹1,299",
       oldPrice: "₹1,899",
@@ -144,7 +144,7 @@ export default function HomePage() {
   return (
     <>
       {window.innerWidth > 768 ? (
-        <div className="w-full pt-8 lg:max-h-screen">
+        <div className="w-full pt-0 lg:max-h-screen">
           <CustomSwiper
             slides={slides}
             autoplayDelay={3000}
@@ -170,29 +170,37 @@ export default function HomePage() {
           <section className="value-props mx-auto my-10 flex max-w-6xl flex-col justify-between gap-6 px-[2vw] lg:flex-row">
             {[
               {
-                icon: <FaHeadset className="text-4xl text-blue-600 dark:text-blue-400" />,
+                icon: (
+                  <FaHeadset className="text-4xl text-blue-600 dark:text-blue-400" />
+                ),
                 title: "Customer Care You Can Trust",
                 desc: "24/7 Support for all your needs.",
               },
               {
-                icon: <FaGift className="text-4xl text-blue-600 dark:text-blue-400" />,
+                icon: (
+                  <FaGift className="text-4xl text-blue-600 dark:text-blue-400" />
+                ),
                 title: "Handpicked for Quality",
                 desc: "Curated collection from gadgets to home essentials.",
               },
               {
-                icon: <FaTags className="text-4xl text-blue-600 dark:text-blue-400" />,
+                icon: (
+                  <FaTags className="text-4xl text-blue-600 dark:text-blue-400" />
+                ),
                 title: "Unbeatable Value",
                 desc: "Best Price Guarantee on every product.",
               },
               {
-                icon: <FaTruckMoving className="text-4xl text-blue-600 dark:text-blue-400" />,
+                icon: (
+                  <FaTruckMoving className="text-4xl text-blue-600 dark:text-blue-400" />
+                ),
                 title: "Doorstep Delivery in Delhi-NCR",
                 desc: "On-time & secure delivery, always.",
               },
             ].map((item, idx) => (
               <div
                 key={idx}
-                className="value-prop flex w-full min-w-44 flex-col items-center rounded-lg bg-white dark:bg-gray-800 px-4 py-5 text-center shadow-md dark:shadow-gray-700/20"
+                className="value-prop flex w-full min-w-44 flex-col items-center rounded-lg bg-white px-4 py-5 text-center shadow-md dark:bg-gray-800 dark:shadow-gray-700/20"
               >
                 {item.icon}
                 <h4 className="my-1.5 text-lg font-semibold text-gray-900 dark:text-white">
@@ -225,7 +233,7 @@ export default function HomePage() {
               ].map((cat, idx) => (
                 <div
                   key={idx}
-                  className="category-card flex min-w-48 flex-1 cursor-pointer flex-col items-center rounded-lg bg-white dark:bg-gray-800 px-4 py-5 shadow-md dark:shadow-gray-700/20"
+                  className="category-card flex min-w-48 flex-1 cursor-pointer flex-col items-center rounded-lg bg-white px-4 py-5 shadow-md dark:bg-gray-800 dark:shadow-gray-700/20"
                 >
                   <img
                     className="mb-3 w-20 object-contain"
@@ -248,17 +256,17 @@ export default function HomePage() {
 
           {/* Products */}
           <section className="mx-auto mb-10 max-w-[1100px] px-4">
-            <div className="text-blue-600 dark:text-blue-400 mb-4 text-[1.5em] font-semibold">
+            <div className="mb-4 text-[1.5em] font-semibold text-blue-600 dark:text-blue-400">
               New Arrivals &amp; Bestsellers
             </div>
             <div className="flex flex-wrap justify-around gap-6">
               {products.map((product, idx) => (
                 <div
                   key={idx}
-                  className="relative mb-6 flex max-w-[250px] min-w-[220px] flex-1 flex-col items-center rounded-lg bg-white dark:bg-gray-800 p-5 shadow-sm dark:shadow-gray-700/20 transition-all duration-200 hover:-translate-y-1 hover:scale-[1.03] hover:shadow-lg dark:hover:shadow-gray-700/40"
+                  className="relative mb-6 flex max-w-[250px] min-w-[220px] flex-1 flex-col items-center rounded-lg bg-white p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:scale-[1.03] hover:shadow-lg dark:bg-gray-800 dark:shadow-gray-700/20 dark:hover:shadow-gray-700/40"
                 >
                   {/* Tag */}
-                  <span className="bg-blue-600 dark:bg-blue-400 absolute top-3 left-3 rounded px-2 py-0.5 text-xs font-semibold text-white">
+                  <span className="absolute top-3 left-3 rounded bg-blue-600 px-2 py-0.5 text-xs font-semibold text-white dark:bg-blue-400">
                     {product.tag}
                   </span>
                   {/* Product Icon */}
@@ -269,23 +277,21 @@ export default function HomePage() {
                   </h6>
                   {/* Price Row */}
                   <div className="mb-2 flex items-center">
-                    <span className="text-green-600 dark:text-green-400 text-lg font-semibold">
+                    <span className="text-lg font-semibold text-green-600 dark:text-green-400">
                       {product.price}
                     </span>
-                    <span className="text-gray-400 dark:text-gray-500 ml-2 text-sm line-through">
+                    <span className="ml-2 text-sm text-gray-400 line-through dark:text-gray-500">
                       {product.oldPrice}
                     </span>
                   </div>
                   {/* Actions */}
                   <div className="mt-3 flex gap-2">
-                    <button
-                      className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-400 dark:hover:bg-blue-500 rounded px-4 py-2 font-medium text-white transition-colors duration-200 focus:outline-hidden active:scale-95"
-                    >
+                    <button className="rounded bg-blue-600 px-4 py-2 font-medium text-white transition-colors duration-200 hover:bg-blue-700 focus:outline-hidden active:scale-95 dark:bg-blue-400 dark:hover:bg-blue-500">
                       Add to Cart
                     </button>
                     <a
                       href="#"
-                      className="border-blue-600 dark:border-blue-400 text-blue-600 dark:text-blue-400 hover:bg-blue-600 dark:hover:bg-blue-400 rounded border bg-white dark:bg-gray-800 px-4 py-2 font-medium transition-colors duration-200 hover:text-white dark:hover:text-white focus:outline-hidden active:scale-95"
+                      className="rounded border border-blue-600 bg-white px-4 py-2 font-medium text-blue-600 transition-colors duration-200 hover:bg-blue-600 hover:text-white focus:outline-hidden active:scale-95 dark:border-blue-400 dark:bg-gray-800 dark:text-blue-400 dark:hover:bg-blue-400 dark:hover:text-white"
                     >
                       View Details
                     </a>
@@ -299,12 +305,12 @@ export default function HomePage() {
           <section>
             <div className="container mx-auto py-8 text-gray-900 dark:text-gray-100">
               <h1 className="mb-8 text-3xl font-bold">Featured Products</h1>
-              <ProductList limit={20} />
+              <ProductList />
             </div>
           </section>
 
           {/* Newsletter */}
-          <section className="newsletter-section mb-10 rounded-lg bg-blue-600 dark:bg-blue-400 px-1 py-8 text-center text-white md:mx-[2vw]">
+          <section className="newsletter-section mb-10 rounded-lg bg-blue-600 px-1 py-8 text-center text-white md:mx-[2vw] dark:bg-blue-400">
             <h3 className="mt-5 mb-2 text-2xl font-semibold">
               Never Miss a Beat with Fitric – Get Exclusive Offers!
             </h3>
@@ -319,13 +325,13 @@ export default function HomePage() {
               }}
             >
               <input
-                className="min-w-9/12 rounded bg-white dark:bg-gray-100 px-4 py-2 text-base text-gray-950 outline-none"
+                className="min-w-9/12 rounded bg-white px-4 py-2 text-base text-gray-950 outline-none dark:bg-gray-100"
                 type="email"
                 placeholder="Enter your email address"
                 required
               />
               <button
-                className="cursor-pointer rounded bg-green-500 hover:bg-green-600 text-white px-5 py-2 font-semibold duration-200 ease-in-out"
+                className="cursor-pointer rounded bg-green-500 px-5 py-2 font-semibold text-white duration-200 ease-in-out hover:bg-green-600"
                 type="submit"
               >
                 Subscribe

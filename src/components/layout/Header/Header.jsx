@@ -1,260 +1,5 @@
-// const Header = ({
-//   logo,
-//   navigationItems,
-//   user,
-//   onLogin,
-//   onLogout,
-//   ctaButton,
-//   theme = 'light',
-//   sticky = false,
-//   className = '',
-//   onThemeToggle,
-//   isDarkMode,
-// }) => {
-//   const [isMenuOpen, setIsMenuOpen] = useState(false)
-//   const [scrolled, setScrolled] = useState(false)
-//   const { userData } = useSelector((state) => state.auth)
-//   const dispatch = useDispatch()
-
-//   useEffect(() => {
-//     if (userData) {
-//       dispatch(fetchCartItems(userData.$id))
-//       dispatch(fetchWishlistItems(userData.$id))
-//       dispatch(fetchUserOrders(userData.$id))
-//     }
-//   }, [dispatch, userData])
-
-//   // Handle scroll effect for sticky header
-//   useEffect(() => {
-//     const handleScroll = () => {
-//       setScrolled(window.scrollY > 10)
-//     }
-//     window.addEventListener('scroll', handleScroll)
-//     return () => window.removeEventListener('scroll', handleScroll)
-//   }, [])
-
-//   // Close mobile menu when resizing to desktop
-//   useEffect(() => {
-//     const handleResize = () => {
-//       if (window.innerWidth >= 768) {
-//         setIsMenuOpen(false)
-//       }
-//     }
-//     window.addEventListener('resize', handleResize)
-//     return () => window.removeEventListener('resize', handleResize)
-//   }, [])
-
-//   // Theme classes
-//   const themeClasses =
-//     theme === 'dark'
-//       ? 'bg-gray-900 text-white'
-//       : 'bg-gray-100 text-gray-900 border-b border-gray-100 dark:border-none'
-
-//   const scrolledClasses = scrolled
-//     ? 'shadow-md bg-gray-900 py-2 dark:bg-gray-800'
-//     : 'py-4'
-
-//   return (
-//     <header
-//       className={`transition-all duration-300 light ${
-//         isDarkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-950'
-//       } ${sticky ? 'sticky top-0 z-50' : ''} ${scrolledClasses} ${className}`}
-//     >
-//       <div className="container mx-auto px-4">
-//         <div className="flex justify-between items-center">
-//           {/* Logo */}
-//           <Link to={'/'}>
-//             <div className="flex-shrink-0">
-//               {typeof logo === 'string' ? (
-//                 <img
-//                   src={logo}
-//                   alt="Logo"
-//                   className="h-8 w-auto"
-//                   width={32}
-//                   height={32}
-//                 />
-//               ) : (
-//                 <>{logo}</>
-//               )}
-//             </div>
-//           </Link>
-
-//           <div className="flex justify-between items-center space-x-8">
-//             {/* Desktop Navigation */}
-//             <nav className="hidden md:flex md:items-center md:space-x-8">
-//               <ul className="flex space-x-8">
-//                 {navigationItems.map((item, i) => (
-//                   <li key={i}>
-//                     <NavLink
-//                       to={item.to}
-//                       className={({ isActive }) =>
-//                         isActive
-//                           ? 'text-red-500 underline hover:text-primary-500 transition-colors duration-200 font-medium'
-//                           : 'hover:text-primary-500 transition-colors duration-200 font-medium'
-//                       }
-//                       aria-current={item.isActive ? 'page' : undefined}
-//                     >
-//                       {item.label}
-//                     </NavLink>
-//                   </li>
-//                 ))}
-//               </ul>
-//             </nav>
-
-//             {/* Theme toggle button */}
-//             <button
-//               onClick={onThemeToggle}
-//               className="p-2 cursor-pointer rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 hidden md:block"
-//             >
-//               {isDarkMode ? (
-//                 <svg
-//                   className="w-6 h-6"
-//                   fill="currentColor"
-//                   viewBox="0 0 20 20"
-//                 >
-//                   {/* Sun icon */}
-//                   <path
-//                     fillRule="evenodd"
-//                     d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
-//                   />
-//                 </svg>
-//               ) : (
-//                 <svg
-//                   className="w-6 h-6"
-//                   fill="currentColor"
-//                   viewBox="0 0 20 20"
-//                 >
-//                   {/* Moon icon */}
-//                   <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
-//                 </svg>
-//               )}
-//             </button>
-
-//             {/* Auth Section */}
-//             <div className="hidden md:flex items-center space-x-4">
-//               {user ? (
-//                 <div className="flex items-center space-x-4">
-//                   <span>Hi, {user.name}</span>
-//                   <button
-//                     onClick={onLogout}
-//                     className="px-4 py-2 bg-primary-500 hover:bg-primary-600 rounded-md transition-colors"
-//                   >
-//                     Logout
-//                   </button>
-//                 </div>
-//               ) : (
-//                 <button
-//                   onClick={onLogin}
-//                   className="px-4 py-2 bg-primary-500 hover:bg-primary-600 rounded-md transition-colors"
-//                 >
-//                   Login
-//                 </button>
-//               )}
-
-//               {ctaButton && <div className="flex gap-4 ml-4">{ctaButton}</div>}
-//             </div>
-//           </div>
-
-//           <div className='flex items-center md:hidden'>
-//             {/* Theme toggle button */}
-//             <button
-//               onClick={onThemeToggle}
-//               className="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700"
-//             >
-//               {isDarkMode ? (
-//                 <svg
-//                   className="w-6 h-6"
-//                   fill="currentColor"
-//                   viewBox="0 0 20 20"
-//                 >
-//                   {/* Sun icon */}
-//                   <path
-//                     fillRule="evenodd"
-//                     d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
-//                   />
-//                 </svg>
-//               ) : (
-//                 <svg
-//                   className="w-6 h-6"
-//                   fill="currentColor"
-//                   viewBox="0 0 20 20"
-//                 >
-//                   {/* Moon icon */}
-//                   <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
-//                 </svg>
-//               )}
-//             </button>
-//             {/* Mobile Menu Button */}
-//             <button
-//               className="md:hidden p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500"
-//               onClick={() => setIsMenuOpen(!isMenuOpen)}
-//               aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-//             >
-//               {isMenuOpen ? (
-//                 <XIcon className="h-6 w-6" />
-//               ) : (
-//                 <MenuIcon className="h-6 w-6" />
-//               )}
-//             </button>
-//           </div>
-//         </div>
-
-//         {/* Mobile Navigation */}
-//         {isMenuOpen && (
-//           <div className="md:hidden mt-4 pb-4">
-//             <ul className="space-y-4">
-//               {navigationItems.map((item) => (
-//                 <li key={item.label}>
-//                   <NavLink
-//                     to={item.to}
-//                     className="block py-2 hover:text-primary-500"
-//                     onClick={() => setIsMenuOpen(false)}
-//                   >
-//                     {item.label}
-//                   </NavLink>
-//                 </li>
-//               ))}
-//             </ul>
-
-//             <div className="mt-6 pt-6 border-t border-gray-200">
-//               {user ? (
-//                 <div className="flex items-center justify-between">
-//                   <span>Hi, {user.name}</span>
-//                   <button
-//                     onClick={() => {
-//                       onLogout()
-//                       setIsMenuOpen(false)
-//                     }}
-//                     className="px-4 cursor-pointer py-2 bg-primary-500 text-white rounded-md"
-//                   >
-//                     Logout
-//                   </button>
-//                 </div>
-//               ) : (
-//                 <button
-//                   onClick={() => {
-//                     onLogin()
-//                     setIsMenuOpen(false)
-//                   }}
-//                   className={`w-full px-4 py-2 cursor-pointer bg-primary-500 ${themeClasses} text-white rounded-md`}
-//                 >
-//                   Login
-//                 </button>
-//               )}
-
-//               {ctaButton && <div className="mt-4">{ctaButton}</div>}
-//             </div>
-//           </div>
-//         )}
-//       </div>
-//     </header>
-//   )
-// }
-
-// export default Header
-
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router";
+import React, { useState, useEffect, useRef } from "react";
+import { Link, useLocation, useNavigate } from "react-router";
 import {
   MagnifyingGlassIcon,
   ShoppingCartIcon,
@@ -287,7 +32,7 @@ import MobileMenu from "./MobileMenu";
 import { logoutUser } from "../../../redux/slices/authSlice";
 import { toast } from "react-toastify";
 
-const Header = ({ onThemeToggle, isDarkMode }) => {
+const Header = ({ onThemeToggle, isDarkMode, onSearch }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [searchCategory, setSearchCategory] = useState("All");
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
@@ -295,10 +40,13 @@ const Header = ({ onThemeToggle, isDarkMode }) => {
   const dispatch = useDispatch();
   const { userData } = useSelector((state) => state.auth);
   const { items: cartItems } = useSelector((state) => state.cart);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const debounceRef = useRef();
 
   useEffect(() => {
     if (userData) {
-      dispatch(fetchCartItems(userData.$id));
+      dispatch(fetchCartItems(userData.$id));                                                                                                          
       dispatch(fetchWishlistItems(userData.$id));
       dispatch(fetchUserOrders(userData.$id));
     }
@@ -339,6 +87,21 @@ const Header = ({ onThemeToggle, isDarkMode }) => {
       },
     },
   ];
+
+
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => {
+      if (value.trim()) {
+        // Only navigate if not already on the search page or query changed
+        const searchUrl = `/products/search?q=${encodeURIComponent(value.trim())}`;
+        if (location.pathname + location.search !== searchUrl) {
+          navigate(searchUrl);
+        }
+      }
+    }, 300);
+  };
 
   return (
     <>
@@ -392,6 +155,7 @@ const Header = ({ onThemeToggle, isDarkMode }) => {
               <input
                 type="text"
                 placeholder="Search for Products, Brands and More"
+                onChange={handleSearchChange}
                 className="w-full bg-transparent text-sm focus:outline-none"
               />
             </div>
@@ -482,6 +246,7 @@ const Header = ({ onThemeToggle, isDarkMode }) => {
                     <input
                       type="text"
                       placeholder="Search products, brands and more..."
+                      onChange={handleSearchChange}
                       className="h-10 w-full bg-gray-100 px-4 focus:outline-none dark:text-white dark:bg-gray-800"
                     />
                     <button className="h-10 rounded-r-lg bg-[#2a55e5] px-6 text-white hover:bg-[#2a55e5]/90">
