@@ -46,12 +46,12 @@ function App() {
   return (
     <>
       {/* <!-- Top Bar --> */}
-      <div class="top-bar flex items-center justify-between bg-[#1a8d8d] px-1.5 py-2 text-white sm:px-[4vw] md:px-[2vw]">
+      <div className="top-bar flex items-center justify-between bg-[#1a8d8d] px-1.5 py-2 text-white sm:px-[4vw] md:px-[2vw]">
         <span className="flex items-center gap-1 md:text-base text-sm">
           <FaTruck className="w-5" />
           Fast Delhi Delivery | Serving New Delhi & NCR
         </span>
-        <span class="socials flex space-x-1">
+        <span className="socials flex space-x-1">
           <Link
             to="#"
             className="ml-3 text-lg text-[var(--white)] hover:text-[var(--bg-secondary]"

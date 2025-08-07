@@ -202,7 +202,7 @@ class DatabaseService {
       return await this.databases.listDocuments(
         config.appwriteDatabaseId,
         config.appwriteOrdersCollectionId,
-        [Query.equal('user_id', userId)]
+        [Query.equal('userId', userId)]
       )
     } catch (error) {
       console.error('Get user orders error:', error)
