@@ -101,6 +101,7 @@ const ProductList = ({ products, category }) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.2 }}
           >
+            
             <ProductCard product={product} />
           </Motion.div>
         ))}

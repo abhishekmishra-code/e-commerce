@@ -302,12 +302,12 @@ export default function HomePage() {
           </section>
 
           {/* Featured Products */}
-          {/* <section>
+          <section>
             <div className="container mx-auto py-8 text-gray-900 dark:text-gray-100">
               <h1 className="mb-8 text-3xl font-bold">Featured Products</h1>
               <ProductList />
             </div>
-          </section> */}
+          </section>
 
           {/* Newsletter */}
           <section className="newsletter-section mb-10 rounded-lg bg-blue-600 px-1 py-8 text-center text-white md:mx-[2vw] dark:bg-blue-400">

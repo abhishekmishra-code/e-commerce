@@ -201,35 +201,7 @@ const ProductCard = ({ product }) => {
       {/* Action Buttons */}
       <div className="p-4 pt-0 border-t border-gray-100 dark:border-gray-700">
         <div className="flex gap-2">
-          {/* <Button
-            variant="outline"
-            size="sm"
-            onClick={handleAddToCart}
-            disabled={isAddingToCart}
-            className="flex-1 bg-amber-300 dark:bg-amber-400/20 hover:bg-amber-400 dark:hover:bg-amber-400/30 
-              transition-all duration-200 disabled:opacity-50"
-          >
-            {isAddingToCart ? (
-              <Motion.span
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="flex items-center justify-center"
-              >
-                <svg className="animate-spin -ml-1 mr-2 h-4 w-4" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                </svg>
-                Adding...
-              </Motion.span>
-            ) : (
-              <span className="flex items-center justify-center">
-                <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-                Add to Cart
-              </span>
-            )}
-          </Button> */}
+          
 
           <Motion.button
           whileHover={{ scale: 1.02 }}

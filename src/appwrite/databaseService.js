@@ -57,11 +57,12 @@ class DatabaseService {
   // Cart operations
   async addToCart({ userId, productId, quantity }) {
     try {
+      const timestamp = new Date().toISOString();
       return await this.databases.createDocument(
         config.appwriteDatabaseId,
         config.appwriteCartCollectionId,
         ID.unique(),
-        { userId, productId, quantity },
+        { userId, productId, quantity, createdAt: timestamp, updatedAt: timestamp, },
         [
         // Only the user who created the cart item can read/update/delete
         Permission.read(Role.user(userId)),
@@ -132,11 +133,12 @@ class DatabaseService {
   // Wishlist operations
   async addToWishlist({ userId, productId }) {
     try {
+      const timestamp = new Date().toISOString();
       return await this.databases.createDocument(
         config.appwriteDatabaseId,
         config.appwriteWishlistCollectionId,
         ID.unique(),
-        { userId, productId },
+        { userId, productId, createdAt: timestamp, updatedAt: timestamp, },
         [
         // Only the user who created the wishlist item can read/update/delete
         Permission.read(Role.user(userId)),
