@@ -727,3 +727,143 @@ export const mockProducts = [
     ratingCount: 65,
   },
 ];
+
+const newData = [
+  {
+    "name": "FITRIC Water Dispenser 5698 Bottled Water Dispenser",
+    "description": "Enhance the health of your family by introducing a convenient way to fill up with water! 1 L capacity holds plenty of liquid. Also perfect for juice, wine, iced tea, coffee and more.",
+    "price": 1499,
+    "mrp": 1999,
+    "categoryId": "kitchen",
+    "brand": "FITRIC",
+    "sku": "FITRIC-DISP-5698",
+    "stock": 15,
+    "images": ["/img/product-1.jpg"],
+    "tags": ["kitchen", "water dispenser", "FITRIC", "home appliance"],
+    "customAttributes": [
+      { "capacity": "1 L" },
+      { "material": "Plastic" },
+      { "multiUse": true }
+    ],
+    "status": "active",
+    "createdAt": "2025-06-26T16:38:00Z",
+    "updatedAt": "2025-06-26T16:38:00Z",
+    "averageRating": 4.3,
+    "ratingCount": 27
+  },
+  {
+    "name": "FITRIC Touch Screen Display Wireless Earbuds",
+    "description": "These true wireless earbuds come with a smart touch screen on the charging case, allowing control over volume, playback, and noise cancellation settings. They feature Bluetooth 5.3 connectivity for seamless pairing and offer an extended playback time. Designed with an IP5.5 waterproof rating, they are suitable for active lifestyles. Intelligent noise reduction technology ensures clear calls and immersive audio even in bustling environments",
+    "price": 2499,
+    "mrp": 4499,
+    "categoryId": "audio",
+    "brand": "FITRIC",
+    "sku": "FITRIC-TWS-TS01",
+    "stock": 20,
+    "images": ["/img/product-2.jpg"],
+    "tags": ["earbuds", "bluetooth", "touch control", "waterproof"],
+    "customAttributes": [
+      { "connectivity": "Bluetooth 5.3" },
+      { "display": "Touch screen" },
+      { "waterproof": "IP5.5" },
+      { "noiseCancellation": true }
+    ],
+    "status": "active",
+    "createdAt": "2025-06-26T16:33:00Z",
+    "updatedAt": "2025-06-26T16:33:00Z",
+    "averageRating": 4.5,
+    "ratingCount": 88
+  },
+  {
+    "name": "FITRIC Upgraded Latest Wireless Stylish Neckband",
+    "description": "Best workout sweatproof bluetooth ear buds. Great for Running, Jogging, Hiking, Biking, Gym etc. Stay in Ear Tech with Comfortable Ear Hook. Neckband design, no wires tangling, and it's easy to storage to your sports armband or arm package bag. SUPERB SOUND Quality headset and Bluetooth V5.0 for stereo sound and superb bass sound. Clear high & low volume. Best wireless earbuds sound.Built-in mic with voice notification of incoming calls. Easy to use buttons allow Skip/Play/Pause on your music tracks as well as all phone use without reaching your phone.",
+    "price": 1399,
+    "mrp": 1999,
+    "categoryId": "audio",
+    "brand": "FITRIC",
+    "sku": "FITRIC-NECKBAND-2025",
+    "stock": 25,
+    "images": ["/img/product-3.jpg"],
+    "tags": ["neckband", "workout", "bluetooth", "sweatproof"],
+    "customAttributes": [
+      { "connectivity": "Bluetooth V5.0" },
+      { "design": "Neckband" },
+      { "batteryLife": "10 hours" },
+      { "sweatResistant": true }
+    ],
+    "status": "active",
+    "createdAt": "2025-06-26T16:30:00Z",
+    "updatedAt": "2025-06-26T16:30:00Z",
+    "averageRating": 4.2,
+    "ratingCount": 65
+  },
+  {
+    "name": "FITRIC M3 (PORTABLE BLUETOOTH MINI SPEAKER)",
+    "description": "Compact M3 speaker with built-in microphone, high-quality sound and Bluetooth connectivity. Switch between audio and phone calls for hands-free convenience.",
+    "price": 1099,
+    "mrp": 1799,
+    "categoryId": "audio",
+    "brand": "FITRIC",
+    "sku": "FITRIC-SPK-M3",
+    "stock": 100,
+    "images": ["/img/product-4.jpg"],
+    "tags": ["bluetooth speaker", "portable", "FITRIC", "M3"],
+    "customAttributes": [
+      { "type": "Portable Speaker" },
+      { "microphone": true },
+      { "connectivity": "Bluetooth 5.0" },
+      { "batteryLife": "8 hours" }
+    ],
+    "status": "active",
+    "createdAt": "2025-06-26T16:25:00Z",
+    "updatedAt": "2025-06-26T16:25:00Z",
+    "averageRating": 4.4,
+    "ratingCount": 73
+  },
+  {
+    "name": "Fire-Boltt Legacy Luxury Smartwatch",
+    "description": "1.43\" AMOLED screen smartwatch with always-on display, Bluetooth calling, wireless charging, and 110+ sports modes. IP68 water resistance, long-lasting battery, and multiple health tracking features.",
+    "price": 3999,
+    "mrp": 6999,
+    "categoryId": "wearables",
+    "brand": "Fire-Boltt",
+    "sku": "FB-LEGACY-SMARTWATCH",
+    "stock": 100,
+    "images": ["/img/smartwatch.jpg"],
+    "tags": ["smartwatch", "fitness", "bluetooth", "Fire-Boltt"],
+    "customAttributes": [
+      { "display": "1.43\" AMOLED" },
+      { "waterResistance": "IP68" },
+      { "battery": "7 days" },
+      { "features": "Bluetooth calling, voice assistant, 110+ sports modes" }
+    ],
+    "status": "active",
+    "createdAt": "2025-06-23T15:30:00Z",
+    "updatedAt": "2025-07-22T17:12:00Z",
+    "averageRating": 4.7,
+    "ratingCount": 115
+  },
+  {
+    "name": "SanDisk SSD PLUS 1TB Internal SSD - SATA III 6 Gb/s",
+    "description": "Easy upgrade for faster boot up, application load and response. Ideal for typical PC workloads with up to 535MB/s read speed and 450MB/s write speed. Improved reliability and performance.",
+    "price": 5599,
+    "mrp": 8499,
+    "categoryId": "storage",
+    "brand": "Sandisk",
+    "sku": "SANDISK-SSD-PLUS-1TB",
+    "stock": 22,
+    "images": ["/img/ssd.jpg"],
+    "tags": ["SSD", "storage", "internal", "Sandisk", "1TB"],
+    "customAttributes": [
+      { "capacity": "1TB" },
+      { "interface": "SATA III" },
+      { "readSpeed": "Up to 535MB/s" },
+      { "writeSpeed": "Up to 450MB/s" }
+    ],
+    "status": "active",
+    "createdAt": "2025-06-21T16:36:00Z",
+    "updatedAt": "2025-07-22T17:47:00Z",
+    "averageRating": 4.6,
+    "ratingCount": 198
+  }
+]

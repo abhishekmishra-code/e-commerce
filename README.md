@@ -39,42 +39,97 @@ This repository contains the source code for a modern e-commerce web application
 
 Below is the typical structure of this project. Exact files or folders may vary based on your implementation:
 
+```plaintext
 
 e-commerce/
-├── public/                         # Static files served directly (images, favicon, etc.)
-│   ├── favicon.ico
-│   ├── robots.txt
-│   └── images/
-│       └── (product images, icons)
-├── src/                            # Source code of the application
-│   ├── assets/                     # Assets such as images, fonts, icons
-│   │   └── (images, icons, logos)
-│   ├── components/                 # Reusable UI components
-│   │   ├── Header.jsx
-│   │   ├── Footer.jsx
-│   │   ├── ProductCard.jsx
-│   │   └── Cart.jsx
-│   ├── pages/                      # Page components or views
-│   │   ├── Home.jsx
-│   │   ├── ProductDetails.jsx
+├── public/                         # Static files served directly (images, logo, redirects)
+│   ├── _redirects
+│   ├── ecom.svg
+│   ├── vite.svg
+│   └── img/                        # Product banners, thumbnails, and marketing assets
+│       ├── product-*.jpg
+│       ├── Artboard_*.webp
+│       ├── BANNER_*.webp
+│       ├── desktop_banner_*.webp
+│       └── silicon-cover-new-web_1600x.webp
+│
+├── src/                            # Application source code
+│   ├── assets/                     # Static assets like images, icons, placeholders
+│   │   ├── add-to-cart.png
+│   │   ├── earbuds-1.jpg
+│   │   └── react.svg
+│
+│   ├── components/                 # Reusable UI components split by domain
+│   │   ├── auth/                   # Login & Signup components
+│   │   ├── carousel/
+│   │   ├── cart/
+│   │   ├── common/                # Common widgets like buttons, forms, spinners
+│   │   ├── dashboard/             # Dashboard-specific layouts and features
+│   │   ├── layout/                # Site-wide layout components like Header/Footer
+│   │   ├── products/              # ProductCard, ProductList, Pagination, etc.
+│   │   ├── ui/                    # UI primitives or headless components
+│   │   └── wishlist/              # Wishlist components
+│
+│   ├── pages/                      # Route-based view components
+│   │   ├── HomePage.jsx
+│   │   ├── ProductViewPage.jsx
 │   │   ├── CartPage.jsx
-│   │   └── Checkout.jsx
-│   ├── context/                    # React context providers (optional)
-│   │   └── CartContext.jsx
-│   ├── hooks/                      # Custom React hooks (optional)
-│   ├── services/                   # API service calls or utility functions for backend
-│   │   └── api.js
-│   ├── styles/                     # CSS/SCSS files or styled components
-│   │   └── main.css
-│   ├── App.jsx                    # Root application component
-│   ├── index.js                   # Entry point for React app
-│   └── setupTests.js              # Test setup (optional)
-├── .gitignore                     # Git ignore rules
-├── package.json                   # Project dependencies and scripts
-├── README.md                      # This readme file
-├── yarn.lock or package-lock.json # Dependency lock file
-└── webpack.config.js or next.config.js # Build or framework config (if applicable)
-
+│   │   ├── CheckoutPage.jsx
+│   │   ├── LoginPage.jsx
+│   │   ├── SignUpPage.jsx
+│   │   ├── FAQPage.jsx
+│   │   ├── ContactUs.jsx
+│   │   ├── OrdersPage.jsx
+│   │   ├── WishlistPage.jsx
+│   │   └── NotFound.jsx
+│
+│   ├── appwrite/                   # Appwrite backend service wrappers
+│   │   ├── authService.js
+│   │   ├── databaseService.js
+│   │   ├── storageService.js
+│   │   ├── roleService.js
+│   │   └── docs/
+│   │       └── auth-service.md
+│
+│   ├── redux/                      # Redux slices and store setup
+│   │   ├── store.js
+│   │   ├── docs/
+│   │   │   └── auth-slice.md
+│   │   └── slices/
+│   │       ├── productSlice.js
+│   │       ├── wishlistSlice.js
+│   │       ├── cartSlice.js
+│   │       ├── ordersSlice.js
+│   │       └── authSlice.js
+│
+│   ├── contexts/                   # React context providers (like ThemeContext)
+│   │   └── ThemeContext.jsx
+│
+│   ├── config/                     # Environment-specific config files
+│   │   └── config.js
+│
+│   ├── data/                       # Static data like mock products
+│   │   └── mockProducts.js
+│
+│   ├── hooks/                      # Custom React hooks
+│   │   ├── use-toast.js
+│   │   └── useTheme.js
+│
+│   ├── App.jsx                     # Root application component
+│   ├── main.jsx                    # React app entry file
+│   ├── index.css                   # Global CSS
+│   └── routes.jsx                  # App routes and route loaders
+│
+├── .gitignore                      # Git ignored files and folders
+├── .env_example                    # Example environment variables
+├── .prettierrc.json                # Prettier code formatting config
+├── eslint.config.js                # ESLint linter configuration
+├── index.html                      # HTML entry point for the app
+├── package.json                    # Project dependencies and scripts
+├── package-lock.json               # Exact version of installed npm packages
+├── vite.config.js                  # Vite build configuration
+├── vercel.json                     # Deployment config (for Vercel)
+└── README.md                       # Project overview and documentation
 
 ---
 

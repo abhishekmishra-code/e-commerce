@@ -110,6 +110,8 @@ export function ProductTable({ products, onEdit, onDelete, isLoading }) {
                 <TableCell className="text-right">
                   <div className="flex items-center justify-end space-x-2">
                     <Button
+                    name='edit'
+                    title="Edit Product"
                       variant="ghost"
                       size="sm"
                       onClick={() => onEdit(product)}
@@ -119,6 +121,8 @@ export function ProductTable({ products, onEdit, onDelete, isLoading }) {
                     </Button>
 
                     <Button
+                    name='delete'
+                    title="Delete Product"
                       variant="ghost"
                       size="sm"
                       onClick={() => onDelete(product)}
