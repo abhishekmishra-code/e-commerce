@@ -130,6 +130,7 @@ e-commerce/
 ├── vite.config.js                  # Vite build configuration
 ├── vercel.json                     # Deployment config (for Vercel)
 └── README.md                       # Project overview and documentation
+```
 
 ---
 
