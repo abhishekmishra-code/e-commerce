@@ -115,15 +115,41 @@ export const updateProduct = createAsyncThunk(
 
 export const deleteProduct = createAsyncThunk(
   "products/deleteProduct",
-  async ({ id }, { rejectWithValue, dispatch }) => {
+  async ({ id, product }, { rejectWithValue, dispatch }) => {
     dispatch(productSlice.actions.removeProduct(id));
+
     try {
+      // 1. Delete from Appwrite Database
       await dbService.deleteProduct(id);
+      console.log(id);
+
+      // 2. Parse fileIds from image URLs
+      const fileIds = (product.images || []).map((url) => {
+        const parts = url.split("/");
+        const fileIdIndex = parts.indexOf("files") + 1;
+        return parts[fileIdIndex];
+      });
+      console.log(fileIds);
+
+      // 3. Delete associated files from storage
+      await Promise.all(
+        fileIds.map((fileId) =>
+          storageService.deleteFile(fileId).catch((err) => {
+            console.warn("Failed to delete file:", fileId, err);
+          })
+        )
+      );
+
       return id;
     } catch (err) {
-      return rejectWithValue(err.message || "Product deletion failed!");
+      console.error("Delete product failed:", err);
+
+      // 4. Roll back — restore product
+      if (product) dispatch(productSlice.actions.addOptimisticProduct(product));
+
+      return rejectWithValue(err.message || "Failed to delete product");
     }
-  },
+  }
 );
 
 const productSlice = createSlice({

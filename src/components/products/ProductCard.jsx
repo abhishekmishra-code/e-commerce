@@ -41,16 +41,7 @@ const ProductCard = ({ product }) => {
       currency: 'INR',
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
-    }).format(normalizedPrice / 100)
-  }
-
-  const getImageUrl = () => {
-    if (!product.image) return null
-    if (product.image.startsWith('http')) return product.image
-    if (product.image && config.appwriteBucketId) {
-      return `${config.appwriteEndpoint}/storage/buckets/${config.appwriteBucketId}/files/${product.image}/view?project=${'68511b72003015a60ac5'}`
-    }
-    return null
+    }).format(normalizedPrice)
   }
 
   const handleWishlistToggle = async () => {
@@ -110,7 +101,7 @@ const ProductCard = ({ product }) => {
     }
   }
 
-  const imageUrl = getImageUrl()
+  const imageUrl = product.images?.[0] || null;
 
   return (
     <Motion.div

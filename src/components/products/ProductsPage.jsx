@@ -55,14 +55,21 @@ export function ProductsPage() {
   };
 
   const handleEditProduct = (product) => {
+    console.log(product);
     setEditingProduct(product);
     setView("edit");
   };
 
-  const handleDeleteProduct = async (productObj) => {
-    console.log(JSON.parse(productObj.images).url);
+const handleDeleteProduct = async (productObj) => {
   setIsLoading(true);
-  await dispatch(deleteProduct({ id: productObj.$id, images: productObj.images }));
+
+  await dispatch(
+    deleteProduct({
+      id: productObj.$id,
+      product: productObj, // includes image URL array
+    })
+  );
+
   setIsLoading(false);
 };
 

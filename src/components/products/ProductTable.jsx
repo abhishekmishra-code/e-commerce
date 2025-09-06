@@ -89,10 +89,10 @@ export function ProductTable({ products, onEdit, onDelete, isLoading }) {
                 <TableCell className="font-mono text-sm">{product.sku}</TableCell>
                 <TableCell>
                   <div className="flex flex-col">
-                    <span className="font-semibold">₹{product.price/100*84}</span>
+                    <span className="font-semibold">₹{product.price}</span>
                     {product.mrp !== product.price && (
                       <span className="text-muted-foreground text-sm line-through">
-                        ₹{product.mrp/100*84}
+                        ₹{product.mrp}
                       </span>
                     )}
                   </div>
