@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import dbService from "../../appwrite/databaseService";
 import storageService from "../../appwrite/storageService";
 import config from "../../config/config";
+import { Query } from "appwrite";
 
 // Only store image URLs (string) in Appwrite!
 const normalizeImages = async (images = []) => {
@@ -9,7 +10,6 @@ const normalizeImages = async (images = []) => {
   for (const img of images) {
     if (img instanceof File) {
       const uploaded = await storageService.uploadFile(img);
-      const preview = storageService.getFilePreview(uploaded.$id);
       const previewUrl =
         `${config.appwriteEndpoint}/storage/buckets/${config.appwriteBucketId}/files/${uploaded.$id}/view?project=${config.appwriteProjectId}`;
       console.log("FileId:", uploaded.$id, "Preview URL:", previewUrl);
@@ -67,7 +67,7 @@ export const createProduct = createAsyncThunk(
             )
           : [];
       // Only include keys present in your schema!
-      const { images, customAttributes, existingImageUrls, ...otherFields } =
+      const { customAttributes, existingImageUrls, ...otherFields } =
         formData;
       const newProductData = {
         ...otherFields,
@@ -99,7 +99,7 @@ export const updateProduct = createAsyncThunk(
       );
       const newImages = await normalizeImages(formData.images || []);
       // Only include schema keys
-      const { images, customAttributes, existingImageUrls, ...otherFields } = formData;
+      const { customAttributes, ...otherFields } = formData;
       const updated = await dbService.updateProduct(id, {
         ...otherFields,
         images: [...keptImages, ...newImages],
@@ -223,7 +223,7 @@ const productSlice = createSlice({
         state.status = "failed";
         state.error = action.payload;
       })
-      .addCase(deleteProduct.fulfilled, (state, action) => {
+      .addCase(deleteProduct.fulfilled, (state) => {
         state.status = "succeeded";
       })
       .addCase(deleteProduct.rejected, (state, action) => {

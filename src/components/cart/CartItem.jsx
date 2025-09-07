@@ -6,8 +6,18 @@ import { TrashIcon, PhotoIcon, ExclamationCircleIcon } from '@heroicons/react/24
 import Button from '../common/Button'
 import QuantitySelector from '../common/QuantitySelector'
 import config from '../../config/config'
+import { useSelector } from 'react-redux'
 
 const CartItem = ({ item, onUpdateQuantity, onRemove }) => {
+  const { items: productsList } = useSelector((state) => state.products);
+
+  const [product] = productsList.filter(
+    (product) => product.$id === item.productId,
+  );
+
+  console.log('Cart Item',item);
+  console.log('Product', product);
+
   const formatText = (text) => {
     if (!text) return ''
     return text
@@ -16,21 +26,7 @@ const CartItem = ({ item, onUpdateQuantity, onRemove }) => {
       .join(' ')
   }
 
-  const getImageUrl = () => {
-    if (!item?.productId?.image) return null
-
-    if (item.productId.image.startsWith('http')) {
-      return item.productId.image
-    }
-
-    if (item.productId.image && config.appwriteBucketId) {
-      return `${config.appwriteEndpoint}/storage/buckets/${config.appwriteBucketId}/files/${item.productId.image}/view?project=${config.appwriteProjectId}`
-    }
-
-    return null
-  }
-
-  const imageUrl = getImageUrl()
+  const [ imageUrl ] = product.images
 
   if (!item || !item.productId) {
     return null
@@ -39,14 +35,14 @@ const CartItem = ({ item, onUpdateQuantity, onRemove }) => {
   return (
     <div className="flex flex-col sm:flex-row p-4 gap-4 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors duration-200">
       <Link 
-        to={`/product/${item.productId.$id}`}
+        to={`/product/${product.$id}`}
         className="flex-shrink-0 w-24 h-24 bg-gray-100 dark:bg-gray-700 rounded-md overflow-hidden group cursor-pointer hover:ring-2 hover:ring-blue-500 dark:hover:ring-blue-400 transition-all duration-200"
-        aria-label={`View ${formatText(item.productId.name)} details`}
+        aria-label={`View ${formatText(product.name)} details`}
       >
         {imageUrl ? (
           <img
             src={imageUrl}
-            alt={formatText(item.productId.name)}
+            alt={formatText(product.name)}
             className="object-contain w-full h-full transition-all duration-300 group-hover:scale-105"
             onError={(e) => {
               e.target.onerror = null
@@ -63,37 +59,37 @@ const CartItem = ({ item, onUpdateQuantity, onRemove }) => {
 
       <div className="flex-grow max-w-1/2">
         <Link 
-          to={`/product/${item.productId.$id}`}
+          to={`/product/${product.$id}`}
           className="group inline-block"
-          aria-label={`View ${formatText(item.productId.name)} details`}
+          aria-label={`View ${formatText(product.name)} details`}
         >
           <h3 className="font-medium text-lg text-gray-800 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-            {formatText(item.productId.name) || 'Product'}
+            {formatText(product.name) || 'Product'}
           </h3>
         </Link>
         
         <p className="text-gray-700 dark:text-gray-300 text-sm mb-2">
-          {formatText(item.productId.category) || 'Category'}
+          {formatText(product.category) || 'Category'}
         </p>
         
         <p className="font-bold text-gray-800 dark:text-white mb-2">
-          ₹{item.productId?.price 
-              ? (item.productId.price / 100).toFixed(2)
+          ₹{product?.price 
+              ? (product.price).toFixed(2)
               : '0.00'
            }
         </p>
 
-        {!!item.productId?.isShippable && (
+        {!!product?.isShippable && (
           <div className="flex items-center text-red-600 dark:text-red-500 text-sm mb-1" role="alert">
             <ExclamationCircleIcon className="w-4 h-4 mr-1 flex-shrink-0" />
             <span>This item cannot be shipped to your location</span>
           </div>
         )}
 
-        {item.productId?.stock < 5 && (
+        {product?.stock < 5 && (
           <div className="flex items-center text-amber-600 dark:text-amber-500 text-sm" role="alert">
             <ExclamationCircleIcon className="w-4 h-4 mr-1 flex-shrink-0" />
-            <span>Only {item.productId.stock} left in stock</span>
+            <span>Only {product.stock} left in stock</span>
           </div>
         )}
       </div>
@@ -103,7 +99,7 @@ const CartItem = ({ item, onUpdateQuantity, onRemove }) => {
           quantity={item.quantity}
           onChange={(newQuantity) => onUpdateQuantity(item.$id, newQuantity)}
           min={1}
-          max={item.productId?.stock || 10}
+          max={product?.stock || 10}
           className="dark:border-gray-600"
         />
 
@@ -112,7 +108,7 @@ const CartItem = ({ item, onUpdateQuantity, onRemove }) => {
           size="sm"
           onClick={() => onRemove(item.$id)}
           className="w-full sm:w-auto group"
-          aria-label={`Remove ${formatText(item.productId.name)} from cart`}
+          aria-label={`Remove ${formatText(product.name)} from cart`}
         >
           <TrashIcon className="w-5 h-5 mr-2 inline-block group-hover:text-red-600 transition-colors" />
           Remove

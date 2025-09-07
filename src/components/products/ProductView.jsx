@@ -93,7 +93,6 @@ const ProductView = ({ currentProduct }) => {
   };
   console.log(currentProduct);
   if (currentProduct?.customAttributes) {
-    
     console.log(JSON.parse(currentProduct?.customAttributes));
   }
 
@@ -102,20 +101,9 @@ const ProductView = ({ currentProduct }) => {
     colors: ["black", "white", "navy", "gray"],
     sizes: ["S", "M", "L", "XL"],
     images: currentProduct?.images || [],
-
-    // images: [
-    //   currentProduct?.images[0],
-    //   '/img/product-2.jpg',
-    //   '/img/product-3.jpg',
-    //   '/img/product-4.jpg'
-    // ],
-    specifications: currentProduct?.customAttributes ? JSON.parse(currentProduct?.customAttributes) : {},
-    // specifications: {
-    //   material: "100% Cotton",
-    //   fit: "Regular",
-    //   care: "Machine wash cold",
-    //   origin: "Made in Portugal",
-    // },
+    specifications: currentProduct?.customAttributes
+      ? JSON.parse(currentProduct?.customAttributes)
+      : {},
     rating: 4.5,
     reviewCount: 128,
   };
