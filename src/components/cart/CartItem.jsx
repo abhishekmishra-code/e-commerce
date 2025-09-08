@@ -15,9 +15,6 @@ const CartItem = ({ item, onUpdateQuantity, onRemove }) => {
     (product) => product.$id === item.productId,
   );
 
-  console.log('Cart Item',item);
-  console.log('Product', product);
-
   const formatText = (text) => {
     if (!text) return ''
     return text
