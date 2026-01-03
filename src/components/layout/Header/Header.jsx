@@ -32,7 +32,7 @@ import MobileMenu from "./MobileMenu";
 import { logoutUser } from "../../../redux/slices/authSlice";
 import { toast } from "react-toastify";
 
-const Header = ({ onThemeToggle, isDarkMode, onSearch }) => {
+const Header = ({ onThemeToggle, isDarkMode }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [searchCategory, setSearchCategory] = useState("All");
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);

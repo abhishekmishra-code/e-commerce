@@ -47,4 +47,4 @@ const Button = forwardRef(function Button(
   );
 });
 
-export { Button, buttonVariants };
+export { Button };

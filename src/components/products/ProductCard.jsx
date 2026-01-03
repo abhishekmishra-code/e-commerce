@@ -8,7 +8,6 @@ import {
 } from '../../redux/slices/wishlistSlice'
 import { addCartItem } from '../../redux/slices/cartSlice'
 import { toast } from 'react-toastify'
-import config from '../../config/config'
 import Button from '../common/Button'
 import { ShoppingCartIcon } from '@heroicons/react/24/solid'
 
@@ -19,10 +18,13 @@ const ProductCard = ({ product }) => {
   const [isAddingToCart, setIsAddingToCart] = useState(false)
 
   const { items: cartItems } = useSelector((state) => state.cart)
-  const isInCart = cartItems.some(item => item.productId?.$id === product?.$id)
+  const isInCart = cartItems.some(item => item.productId === product?.$id)
+
+  console.log(cartItems, product);
+  console.log(isInCart);
 
   const isInWishlist = wishlistItems.some(
-    (item) => item.productId.$id === product.$id
+    (item) => item.productId === product.$id
   )
 
   const formatText = (text) => {

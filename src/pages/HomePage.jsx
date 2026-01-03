@@ -1,10 +1,9 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import Container from "../components/layout/Container";
 import ProductList from "../components/products/ProductList";
 import CustomSwiper from "../components/carousel/CustomSwiper";
 import { FaGift, FaHeadset, FaTags, FaTruckMoving } from "react-icons/fa";
-import { Link, useOutletContext } from "react-router";
+import { Link } from "react-router";
 import {
   SpeakerWaveIcon,
   DevicePhoneMobileIcon,

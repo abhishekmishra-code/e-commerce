@@ -30,4 +30,4 @@ function Badge({ className = "", variant, ...props }) {
   return <div className={combinedClasses} {...props} />;
 }
 
-export { Badge, badgeVariants };
+export { Badge };

@@ -16,7 +16,6 @@ import {
 import ImageGallery from "./ImageGallery";
 import ProductInfo from "./ProductInfo";
 import TabSection from "./TabSection";
-import config from "../../config/config";
 
 const ProductView = ({ currentProduct }) => {
   const dispatch = useDispatch();
@@ -93,7 +92,7 @@ const ProductView = ({ currentProduct }) => {
   };
   console.log(currentProduct);
   if (currentProduct?.customAttributes) {
-    console.log(JSON.parse(currentProduct?.customAttributes));
+    // console.log(JSON.parse(currentProduct?.customAttributes));
   }
 
   const product = {
@@ -102,7 +101,7 @@ const ProductView = ({ currentProduct }) => {
     sizes: ["S", "M", "L", "XL"],
     images: currentProduct?.images || [],
     specifications: currentProduct?.customAttributes
-      ? JSON.parse(currentProduct?.customAttributes)
+      ? 'JSON.parse(currentProduct?.customAttributes)'
       : {},
     rating: 4.5,
     reviewCount: 128,

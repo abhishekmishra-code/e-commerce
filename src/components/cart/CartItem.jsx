@@ -5,7 +5,6 @@ import { Link } from 'react-router'
 import { TrashIcon, PhotoIcon, ExclamationCircleIcon } from '@heroicons/react/24/outline'
 import Button from '../common/Button'
 import QuantitySelector from '../common/QuantitySelector'
-import config from '../../config/config'
 import { useSelector } from 'react-redux'
 
 const CartItem = ({ item, onUpdateQuantity, onRemove }) => {

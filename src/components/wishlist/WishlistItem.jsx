@@ -6,8 +6,6 @@ import {
   PhotoIcon,
   ShoppingCartIcon,
 } from "@heroicons/react/24/outline";
-import Button from "../common/Button";
-import config from "../../config/config";
 import { useDispatch, useSelector } from "react-redux";
 import { motion as Motion } from "framer-motion";
 import { addCartItem } from "../../redux/slices/cartSlice";
@@ -18,7 +16,7 @@ const WishlistItem = ({ item, onRemove }) => {
   const { items: productsList } = useSelector((state) => state.products);
   const { items: cartItems } = useSelector((state) => state.cart);
   const isInCart = cartItems.some(
-    (cartItem) => cartItem.productId?.$id === item?.$id,
+    (cartItem) => cartItem.productId === item?.$id,
   );
   const [isAddingToCart, setIsAddingToCart] = useState(false);
   const dispatch = useDispatch();
